@@ -20,6 +20,10 @@ module.exports = {
 				loader: ExtractTextPlugin.extract("css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]")
 				// loaders: ['style-loader', 'css-loader'],
 				// include: __dirname + '/src'
+			},
+			{
+				test: /\.(svg|woff|woff2|eot|ttf|otf)$/,
+				loader: 'file-loader'			
 			}
 		]
 	},
