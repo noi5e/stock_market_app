@@ -1,16 +1,32 @@
 {
-  "name": "nightlife_app",
+  "name": "react_authentication_boilerplate",
   "version": "1.0.0",
-  "description": "FreeCodeCamp nightlife club check-in app.",
+  "description": "MERN-stack boilerplate featuring user login, registration and authentication with Passport.js",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && open index.html"
+    "watch": "webpack -d --watch",
+    "build": "webpack",
+    "serve": "node index.js"
   },
   "author": "Will G",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "history": "^4.6.3",
+    "jsonwebtoken": "^7.4.1",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.11.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "validator": "^8.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -20,7 +36,6 @@
     "css-loader": "^0.28.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
-    "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^0.18.1",
     "webpack": "^2.6.0",
     "webpack-dev-server": "^2.4.5"
