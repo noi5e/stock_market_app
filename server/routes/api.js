@@ -169,7 +169,7 @@ router.post('/', function(request, response, next) {
 	if (typeof authorizationHeader !== 'undefined') {
 		const jsonWebToken = authorizationHeader.split(" ")[1];
 
-		console.log('jsonWebToken: ' jsonWebToken);
+		console.log('jsonWebToken: ' + jsonWebToken);
 
 		if (jsonWebToken !== 'null') {
 			jwt.verify(jsonWebToken, process.env.JWT_KEY, (error, decodedToken) => {
