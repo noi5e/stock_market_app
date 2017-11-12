@@ -45,7 +45,7 @@ class Main extends React.Component {
 				</div>
 
 				<footer className={style.footer}>
-					<p>&copy; 2016 Will G</p>
+					<p>&copy; 2017 Will G</p>
 				</footer>
 			</div>
 		);

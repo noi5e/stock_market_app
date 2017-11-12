@@ -129,7 +129,7 @@ class SearchFormContainer extends React.Component {
 		const xhr = new XMLHttpRequest();
 		xhr.open('post', '/api/checkin_checkout');
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`);
+		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken() ? Auth.getToken() : null}`);
 		xhr.responseType = 'json';
 
 		xhr.addEventListener('load', () => {
