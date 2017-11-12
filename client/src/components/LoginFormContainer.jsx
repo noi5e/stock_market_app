@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from './LoginForm.jsx';
-import Auth from '../modules/Auth.js';
+import Auth from '../../modules/Auth.js';
 import { Redirect } from 'react-router-dom';
 
 
