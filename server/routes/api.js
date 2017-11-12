@@ -164,10 +164,11 @@ function getYelpApiToken(searchTerm, userMongoId, response) {
 
 router.post('/', function(request, response, next) {
 
-	const authorizationHeader = request.headers.authorization;
+	// const authorizationHeader = request.headers.authorization;
+	const jsonWebToken = request.body.jsonWebToken;
 
-	if (typeof authorizationHeader !== 'undefined') {
-		const jsonWebToken = authorizationHeader.split(" ")[1];
+	if (typeof jsonWebToken !== 'undefined') {
+		// const jsonWebToken = authorizationHeader.split(" ")[1];
 
 		console.log('jsonWebToken: ' + jsonWebToken);
 

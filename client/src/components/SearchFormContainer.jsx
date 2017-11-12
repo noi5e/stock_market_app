@@ -51,12 +51,13 @@ class SearchFormContainer extends React.Component {
 
 	loadBusinessData(callback) {
 		const searchTerm = encodeURIComponent(this.state.searchTerm);
-		const formData = `searchTerm=${searchTerm}`;
+		const jsonWebToken = encodeURIComponent(Auth.getToken() ? Auth.getToken() : null);
+		const formData = `searchTerm=${searchTerm}&jsonWebToken=${jsonWebToken}`; json
 
 		const xhr = new XMLHttpRequest();
 		xhr.open('post', '/api')
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
+		// xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
 		xhr.responseType = 'json';
 
 		let response = [];
@@ -129,7 +130,7 @@ class SearchFormContainer extends React.Component {
 		const xhr = new XMLHttpRequest();
 		xhr.open('post', '/api/checkin_checkout');
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken() ? Auth.getToken() : null}`);
+		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`);
 		xhr.responseType = 'json';
 
 		xhr.addEventListener('load', () => {
