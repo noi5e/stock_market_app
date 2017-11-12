@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Auth from '../modules/Auth.js';
+import Auth from '../../modules/Auth.js';
 
 import {
   Route,
   Link
 } from 'react-router-dom'
 
-import bootstrap from '../../public/css/bootstrap.css'
-import style from '../../public/css/style.css'
+import bootstrap from '../../../server/static/css/bootstrap.css'
+import style from '../../../server/static/css/style.css'
 
 import Home from './Home.jsx';
 import Login from './Login.jsx';
