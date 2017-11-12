@@ -9,7 +9,7 @@ module.exports = (request, response, next) => {
 
 	const token = request.headers.authorization.split(' ')[1];
 
-	return jwt.verify(token, "i am a pilgrim and a stranger", (error, decoded) => {
+	return jwt.verify(token, process.env.JWT_KEY, (error, decoded) => {
 		if (error) { return response.status(401).end(); }
 
 		const userId = decoded.sub;
