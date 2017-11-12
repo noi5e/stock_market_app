@@ -54,7 +54,7 @@ class SearchFormContainer extends React.Component {
 		const formData = `searchTerm=${searchTerm}`;
 
 		const xhr = new XMLHttpRequest();
-		xhr.open('post', '/yelp_api')
+		xhr.open('post', '/api')
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
 		xhr.responseType = 'json';
@@ -127,7 +127,7 @@ class SearchFormContainer extends React.Component {
 		const formData = `businessId=${businessId}`;
 
 		const xhr = new XMLHttpRequest();
-		xhr.open('post', '/yelp_api/checkin_checkout');
+		xhr.open('post', '/api/checkin_checkout');
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`);
 		xhr.responseType = 'json';
