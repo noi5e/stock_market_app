@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchForm from './SearchForm.jsx';
 import NightlifeSpotRow from './NightlifeSpotRow.jsx';
-import Auth from '../modules/Auth.js';
+import Auth from '../../modules/Auth.js';
 import { Redirect } from 'react-router-dom';
 
 class SearchFormContainer extends React.Component {
