@@ -4,7 +4,7 @@
   "description": "MERN-stack boilerplate featuring user login, registration and authentication with Passport.js",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
     "watch": "webpack -d --watch",
     "build": "webpack",
     "serve": "node index.js",
