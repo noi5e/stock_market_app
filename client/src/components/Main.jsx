@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Auth from '../../modules/Auth.js';
+import Auth from '../modules/Auth.js';
 
 import {
   Route,
   Link
 } from 'react-router-dom'
 
-import bootstrap from '../../../server/static/css/bootstrap.css'
-import style from '../../../server/static/css/style.css'
+import bootstrap from '../../public/css/bootstrap.css'
+import style from '../../public/css/style.css'
 
 import Home from './Home.jsx';
 import Login from './Login.jsx';
@@ -32,7 +32,7 @@ class Main extends React.Component {
 					<nav>
 						{navigationItems}
 					</nav>		
-					<h3 className={bootstrap['text-muted']}>MERN Stack App</h3>
+					<h3 className={bootstrap['text-muted']}>FreeCodeCamp Nightlife App</h3>
 				</div>
 
 				<div className={bootstrap.row}>
@@ -45,7 +45,7 @@ class Main extends React.Component {
 				</div>
 
 				<footer className={style.footer}>
-					<p>&copy; 2017 Will G</p>
+					<p>&copy; 2016 Will G</p>
 				</footer>
 			</div>
 		);

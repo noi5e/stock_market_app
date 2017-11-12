@@ -1,9 +1,6 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-
 import { Alert, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
-
 import bootstrap from '../../../server/static/css/bootstrap.css'
 import style from '../../../server/static/css/style.css'
 

@@ -59,12 +59,16 @@ class RegisterFormContainer extends React.Component {
 					errors: {}
 				});
 
+				console.log('The form is valid.');
+
 				localStorage.setItem('successMessage', xhr.response.message);
 
 				this.setState({
 					redirectToLogin: true
 				});
 			} else {
+				console.log(xhr.response);
+				console.log('Form is invalid.');
 
 				const errors = xhr.response.errors ? xhr.response.errors : {};
 				errors.summary = xhr.response.message;

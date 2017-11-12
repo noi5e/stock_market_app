@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginForm from './LoginForm.jsx';
-import Auth from '../../modules/Auth.js';
+import Auth from '../modules/Auth.js';
 import { Redirect } from 'react-router-dom';
 
 
@@ -55,6 +55,8 @@ class LoginFormContainer extends React.Component {
 
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
+				console.log(xhr.response);
+
 				Auth.authenticateUser(xhr.response.token);
 
 				this.setState({
@@ -62,6 +64,8 @@ class LoginFormContainer extends React.Component {
 					redirectToHome: true
 				});
 			} else {
+				console.log(xhr.response)
+
 				const errors = xhr.response.errors ? xhr.response.errors : {};
 				errors.summary = xhr.response.message;
 
