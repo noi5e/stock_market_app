@@ -38,7 +38,7 @@ module.exports = new PassportLocalStrategy({
 				sub: user._id
 			};
 
-			const token = jwt.sign(payload, "i am a pilgrim and a stranger");
+			const token = jwt.sign(payload, process.env.JWT_KEY);
 			const data = {
 				name: user.name
 			};
