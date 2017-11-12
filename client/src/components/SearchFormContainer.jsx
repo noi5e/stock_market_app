@@ -51,7 +51,7 @@ class SearchFormContainer extends React.Component {
 
 	loadBusinessData(callback) {
 		const searchTerm = encodeURIComponent(this.state.searchTerm);
-		const jsonWebToken = encodeURIComponent(Auth.getToken() ? Auth.getToken() : null);
+		const jsonWebToken = encodeURIComponent(Auth.getToken());
 		const formData = `searchTerm=${searchTerm}&jsonWebToken=${jsonWebToken}`;
 
 		const xhr = new XMLHttpRequest();
@@ -64,11 +64,13 @@ class SearchFormContainer extends React.Component {
 
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
+				console.log('successful xhr response: ' + xhr.response);
+
 				localStorage.setItem('searchData', JSON.stringify(xhr.response));
 
 				callback(xhr.response);
 			} else {
-				console.log(xhr.response);
+				console.log('unsuccessful xhr response: ' + xhr.response);
 
 				callback([]);
 			}
