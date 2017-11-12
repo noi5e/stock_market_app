@@ -7,7 +7,8 @@ var passport = require('passport');
 
 var mongo = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/database');
+// mongoose.connect('mongodb://localhost:27017/database');
+mongoose.connect(process.env.MONGODB_URI);
 
 // look for static files
 // app.use(express.static(path.join(__dirname, 'public')));
