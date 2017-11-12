@@ -41,9 +41,13 @@ app.get('*', function(request, response, next) {
 	response.redirect('/');
 });
 
-app.set('port', 3000);
+// app.set('port', 3000);
 
-var server = app.listen(app.get('port'), function() {
-	var port = server.address().port;
-	console.log('Now listening at port ' + port);
+// var server = app.listen(app.get('port'), function() {
+// 	var port = server.address().port;
+// 	console.log('Now listening at port ' + port);
+// });
+
+app.listen(process.env.PORT || 8080, function () {
+  console.log('Example app listening on port 8080!');
 });
