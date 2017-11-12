@@ -8,8 +8,8 @@ var User = require('../models/user');
 var Business = require('../models/business');
 const jwt = require('jsonwebtoken')
 
-const clientId = encodeURIComponent(process.env['YELP_CLIENT_ID']);
-const clientSecret = encodeURIComponent(process.env['YELP_CLIENT_SECRET']);
+const clientId = encodeURIComponent(process.env.YELP_CLIENT_ID);
+const clientSecret = encodeURIComponent(process.env.YELP_CLIENT_SECRET);
 
 function getYelpNightclubData(token, location, userMongoId, httpResponseCallback) {
 
@@ -153,8 +153,8 @@ function getYelpApiToken(searchTerm, userMongoId, response) {
 
 		newTokenRequest.write(querystring.stringify({
 			grant_type: 'client_credentials',
-			client_id: '78lm9SSxJ6t2t_Vevyt2JQ',
-			client_secret: 'tPGAqtchbvmfOK1qD39tRjZUOOWpZjnVRVpBubbgtuaHKaUNYWh1uiEUrBqfXe16'
+			client_id: clientId,
+			client_secret: clientSecret
 		}));
 
 		newTokenRequest.end();
@@ -170,7 +170,7 @@ router.post('/', function(request, response, next) {
 		const jsonWebToken = authorizationHeader.split(" ")[1];
 
 		if (jsonWebToken !== 'null') {
-			jwt.verify(jsonWebToken, process.env['JWT_KEY'], (error, decodedToken) => {
+			jwt.verify(jsonWebToken, process.env.JWT_KEY, (error, decodedToken) => {
 				if (error) { console.log(error) }
 
 				getYelpApiToken(request.body.searchTerm, decodedToken.sub, response);	
@@ -191,7 +191,7 @@ router.post('/checkin_checkout', function(request, response, next) {
 		const jsonWebToken = authorizationHeader.split(" ")[1];
 
 		if (jsonWebToken !== 'null') {
-			jwt.verify(jsonWebToken, process.env['JWT_KEY'], (error, decodedToken) => {
+			jwt.verify(jsonWebToken, process.env.JWT_KEY, (error, decodedToken) => {
 				if (error) { console.log(error) }
 
 				let userIsCheckedIn = undefined;
