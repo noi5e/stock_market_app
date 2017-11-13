@@ -7,12 +7,11 @@ import { Redirect } from 'react-router-dom';
 class SearchFormContainer extends React.Component {
 
 	constructor(props) {
-		super(props);
-
-		let searchTerm = localStorage.getItem('searchTerm') ? localStorage.getItem('searchTerm') : '';
-		let searchData = [];
-
 		this.loadBusinessData(searchTerm, (data) => {
+			super(props);
+
+			let searchTerm = localStorage.getItem('searchTerm') ? localStorage.getItem('searchTerm') : '';
+			let searchData = [];
 
 			this.state = {
 				errors: {},
