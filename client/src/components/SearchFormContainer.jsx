@@ -61,20 +61,20 @@ class SearchFormContainer extends React.Component {
 		if (Auth.isUserAuthenticated()) {
 			xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
 		}
-		
+
 		xhr.responseType = 'json';
 
 		let response = [];
 
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
-				console.log('successful xhr response: ' + xhr.response);
+				console.log(xhr.response);
 
 				localStorage.setItem('searchData', JSON.stringify(xhr.response));
 
 				callback(xhr.response);
 			} else {
-				console.log('unsuccessful xhr response: ' + xhr.response);
+				console.log(xhr.response);
 
 				callback([]);
 			}
