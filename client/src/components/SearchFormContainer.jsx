@@ -10,7 +10,6 @@ class SearchFormContainer extends React.Component {
 		super(props);
 
 		if (localStorage.getItem('searchTerm')) {
-			searchTerm = localStorage.getItem('searchTerm');
 			this.state.searchTerm = localStorage.getItem('searchTerm');
 
 			this.loadBusinessData((data) => {
