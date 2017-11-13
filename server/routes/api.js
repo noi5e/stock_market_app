@@ -165,7 +165,7 @@ function getYelpApiToken(searchTerm, userMongoId, response) {
 router.post('/', function(request, response, next) {
 
 	// const authorizationHeader = request.headers.authorization;
-	const jsonWebToken = request.body.jsonWebToken;
+	const jsonWebToken = decodeURIComponent(request.body.jsonWebToken);
 
 	if (typeof jsonWebToken !== 'undefined') {
 		// const jsonWebToken = authorizationHeader.split(" ")[1];
@@ -173,12 +173,16 @@ router.post('/', function(request, response, next) {
 		console.log('jsonWebToken: ' + jsonWebToken);
 
 		if (jsonWebToken !== 'null') {
+			console.log('json web token is valid, decoding it.');
+
 			jwt.verify(jsonWebToken, process.env.JWT_KEY, (error, decodedToken) => {
 				if (error) { console.log(error) }
 
 				getYelpApiToken(request.body.searchTerm, decodedToken.sub, response);	
 			});
 		} else {
+			console.log('json web token is null.');
+
 			getYelpApiToken(request.body.searchTerm, null, response);
 		}
 	} else {
