@@ -7,22 +7,27 @@ import { Redirect } from 'react-router-dom';
 class SearchFormContainer extends React.Component {
 
 	constructor(props) {
-		this.loadBusinessData(searchTerm, (data) => {
-			super(props);
+		super(props);
 
-			let searchTerm = localStorage.getItem('searchTerm') ? localStorage.getItem('searchTerm') : '';
-			let searchData = [];
+		this.state = {
+			errors: {},
+			redirectToLogin: false,
+			searchTerm: localStorage.getItem('searchTerm') ? localStorage.getItem('searchTerm') : '',
+			searchData: []
+		};
 
-			this.state = {
-				errors: {},
-				redirectToLogin: false,
-				searchTerm: searchTerm,
-				searchData: data
-			};
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this); 
+	}
 
-			this.handleChange = this.handleChange.bind(this);
-			this.handleSubmit = this.handleSubmit.bind(this);
-		}); 
+	componentWillMount() {
+		if (this.state.searchTerm.length > 0) {
+			this.loadBusinessData(searchTerm, (data) => {
+				this.setState({
+					searchData: data
+				})
+			});
+		}
 	}
 
 	handleChange(event) {
