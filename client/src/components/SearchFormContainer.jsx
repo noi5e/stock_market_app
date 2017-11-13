@@ -9,24 +9,19 @@ class SearchFormContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		let searchTerm = '';
-		// let searchData = [];
-
-		// localStorage.removeItem('searchTerm');
-		localStorage.removeItem('searchData');
-
 		if (localStorage.getItem('searchTerm')) {
 			searchTerm = localStorage.getItem('searchTerm');
+			this.state.searchTerm = localStorage.getItem('searchTerm');
 
 			this.loadBusinessData((data) => {
 				this.state.searchData = data
 			});
 		} else {
+			this.state.searchTerm = '';
 			this.state.searchData = [];
 		}
 
 		this.state = {
-			searchTerm: searchTerm,
 			errors: {},
 			redirectToLogin: false
 		};
