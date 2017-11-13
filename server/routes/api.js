@@ -167,6 +167,8 @@ router.post('/', function(request, response, next) {
 	const authorizationHeader = request.headers.authorization;
 	// const jsonWebToken = decodeURIComponent(request.body.jsonWebToken);
 
+	console.log('reached this part of the function!');
+
 	if (typeof authorizationHeader !== 'undefined') {
 		const jsonWebToken = authorizationHeader.split(" ")[1];
 
