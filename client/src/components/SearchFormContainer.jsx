@@ -9,6 +9,11 @@ class SearchFormContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.state = {
+			errors: {},
+			redirectToLogin: false
+		};
+
 		if (localStorage.getItem('searchTerm')) {
 			this.state.searchTerm = localStorage.getItem('searchTerm');
 
@@ -19,11 +24,6 @@ class SearchFormContainer extends React.Component {
 			this.state.searchTerm = '';
 			this.state.searchData = [];
 		}
-
-		this.state = {
-			errors: {},
-			redirectToLogin: false
-		};
 
 		// if (searchTerm.length > 0) {
 		// 	this.loadBusinessData((response) => {
