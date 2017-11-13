@@ -22,7 +22,7 @@ class SearchFormContainer extends React.Component {
 
 	componentWillMount() {
 		if (this.state.searchTerm.length > 0) {
-			this.loadBusinessData(searchTerm, (data) => {
+			this.loadBusinessData(this.state.searchTerm, (data) => {
 				this.setState({
 					searchData: data
 				})
