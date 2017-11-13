@@ -1,7 +1,7 @@
 {
-  "name": "react_authentication_boilerplate",
+  "name": "nightlife_app",
   "version": "1.0.0",
-  "description": "MERN-stack boilerplate featuring user login, registration and authentication with Passport.js",
+  "description": "Nightlife check-in app in fulfillment of learning project for FreeCodeCamp",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

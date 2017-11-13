@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 class SearchFormContainer extends React.Component {
 
+	// initialize state for the app, get search term cached from local storage.
 	constructor(props) {
 		super(props);
 
@@ -20,6 +21,7 @@ class SearchFormContainer extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this); 
 	}
 
+	// if there is a search term cached in local storage, call the yelp API to get business data
 	componentWillMount() {
 		if (this.state.searchTerm.length > 0) {
 			this.loadBusinessData(this.state.searchTerm, (data) => {
@@ -30,15 +32,15 @@ class SearchFormContainer extends React.Component {
 		}
 	}
 
+	// this function updates the search form text input value.
 	handleChange(event) {
 		this.setState({
 			searchTerm: event.target.value
 		});
 	}
 
+	// helper function loads business data from yelp
 	loadBusinessData(searchTerm, callback) {
-		// const jsonWebToken = encodeURIComponent(Auth.getToken());
-
 		if (searchTerm && searchTerm.length > 0) {
 
 			const formData = `searchTerm=${encodeURIComponent(searchTerm)}`;
@@ -80,33 +82,11 @@ class SearchFormContainer extends React.Component {
 
 	}
 
+	// submits search text form
 	handleSubmit(event) {
 		event.preventDefault();
 
 		localStorage.setItem('searchTerm', this.state.searchTerm);
-
-		// const searchTerm = encodeURIComponent(this.state.searchTerm);
-		// const formData = `searchTerm=${searchTerm}`;
-
-		// const xhr = new XMLHttpRequest();
-		// xhr.open('post', '/yelp_api')
-		// xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		// xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
-		// xhr.responseType = 'json';
-
-		// xhr.addEventListener('load', () => {
-		// 	if (xhr.status === 200) {
-		// 		localStorage.setItem('searchData', JSON.stringify(xhr.response));
-
-		// 		this.setState({
-		// 			searchData: xhr.response
-		// 		});
-		// 	} else {
-		// 		console.log(xhr.response);
-		// 	}
-		// });
-
-		// xhr.send(formData);
 
 		this.loadBusinessData(this.state.searchTerm, (response) => {
 			this.setState({
