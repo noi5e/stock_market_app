@@ -60,6 +60,8 @@ class SearchFormContainer extends React.Component {
 
 		if (Auth.isUserAuthenticated()) {
 			xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
+		} else {
+			xhr.setRequestHeader('Authorization', `Bearer null`)
 		}
 
 		xhr.responseType = 'json';
