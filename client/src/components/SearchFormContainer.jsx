@@ -24,7 +24,7 @@ class SearchFormContainer extends React.Component {
 			errors: {},
 			redirectToLogin: false,
 			searchTerm: searchTerm,
-			searchData = searchData
+			searchData: searchData
 		};
 
 		// if (searchTerm.length > 0) {
