@@ -28,8 +28,8 @@ const localLoginStrategy = require('./server/passport/local-login');
 passport.use('local-login', localLoginStrategy);
 
 // authentication checker middleware
-const authCheckMiddleware = require('./server/middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+// const authCheckMiddleware = require('./server/middleware/auth-check');
+// app.use('/api', authCheckMiddleware);
 
 const api = require('./server/routes/api');
 app.use('/api', api);
@@ -39,14 +39,6 @@ app.use('/auth', auth);
 app.get('*', function(request, response, next) {
 	console.log('Request: [GET]', request.originalUrl);
 	response.redirect('/');
-});
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", '*');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
 });
 
 // app.set('port', 3000);
