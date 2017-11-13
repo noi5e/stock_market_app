@@ -9,26 +9,21 @@ class SearchFormContainer extends React.Component {
 	constructor(props) {
 		super(props);
 
-		let searchTerm = '';
+		let searchTerm = localStorage.getItem('searchTerm') ? localStorage.getItem('searchTerm') : '';
 		let searchData = [];
 
-		if (localStorage.getItem('searchTerm')) {
-			searchTerm = localStorage.getItem('searchTerm');
+		this.loadBusinessData(searchTerm, (data) => {
 
-			this.loadBusinessData(searchTerm, (data) => {
-				searchData = data
-			});
-		} 
+			this.state = {
+				errors: {},
+				redirectToLogin: false,
+				searchTerm: searchTerm,
+				searchData: data
+			};
 
-		this.state = {
-			errors: {},
-			redirectToLogin: false,
-			searchTerm: searchTerm,
-			searchData: searchData
-		};
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+			this.handleChange = this.handleChange.bind(this);
+			this.handleSubmit = this.handleSubmit.bind(this);
+		}); 
 	}
 
 	handleChange(event) {
@@ -39,37 +34,46 @@ class SearchFormContainer extends React.Component {
 
 	loadBusinessData(searchTerm, callback) {
 		// const jsonWebToken = encodeURIComponent(Auth.getToken());
-		const formData = `searchTerm=${encodeURIComponent(searchTerm)}`;
 
-		const xhr = new XMLHttpRequest();
-		xhr.open('post', '/api')
-		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		if (searchTerm && searchTerm.length > 0) {
 
-		if (Auth.isUserAuthenticated()) {
-			xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
+			const formData = `searchTerm=${encodeURIComponent(searchTerm)}`;
+
+			const xhr = new XMLHttpRequest();
+			xhr.open('post', '/api')
+			xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+			if (Auth.isUserAuthenticated()) {
+				xhr.setRequestHeader('Authorization', `Bearer ${Auth.getToken()}`)
+			} else {
+				xhr.setRequestHeader('Authorization', `Bearer null`)
+			}
+
+			xhr.responseType = 'json';
+
+			let response = [];
+
+			xhr.addEventListener('load', () => {
+				if (xhr.status === 200) {
+					console.log(xhr.response);
+
+					localStorage.setItem('searchData', JSON.stringify(xhr.response));
+
+					callback(xhr.response);
+				} else {
+					console.log(xhr.response);
+
+					callback([]);
+				}
+			});
+
+			xhr.send(formData);
+
+
 		} else {
-			xhr.setRequestHeader('Authorization', `Bearer null`)
+			callback([]);
 		}
 
-		xhr.responseType = 'json';
-
-		let response = [];
-
-		xhr.addEventListener('load', () => {
-			if (xhr.status === 200) {
-				console.log(xhr.response);
-
-				localStorage.setItem('searchData', JSON.stringify(xhr.response));
-
-				callback(xhr.response);
-			} else {
-				console.log(xhr.response);
-
-				callback([]);
-			}
-		});
-
-		xhr.send(formData);
 	}
 
 	handleSubmit(event) {
