@@ -15,7 +15,7 @@ class SearchFormContainer extends React.Component {
 		if (localStorage.getItem('searchTerm')) {
 			searchTerm = localStorage.getItem('searchTerm');
 
-			this.loadBusinessData((data) => {
+			this.loadBusinessData(searchTerm, (data) => {
 				searchData = data
 			});
 		} 
@@ -27,15 +27,6 @@ class SearchFormContainer extends React.Component {
 			searchData: searchData
 		};
 
-		// if (searchTerm.length > 0) {
-		// 	this.loadBusinessData((response) => {
-		// 		this.setState({
-		// 			searchData: response
-		// 		});
-		// 	});
-		// }
-
-
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -46,8 +37,8 @@ class SearchFormContainer extends React.Component {
 		});
 	}
 
-	loadBusinessData(callback) {
-		const searchTerm = encodeURIComponent(this.state.searchTerm);
+	loadBusinessData(searchTerm, callback) {
+		const searchTerm = encodeURIComponent(searchTerm);
 		// const jsonWebToken = encodeURIComponent(Auth.getToken());
 		const formData = `searchTerm=${searchTerm}`;
 
@@ -110,7 +101,7 @@ class SearchFormContainer extends React.Component {
 
 		// xhr.send(formData);
 
-		this.loadBusinessData((response) => {
+		this.loadBusinessData(this.state.searchTerm, (response) => {
 			this.setState({
 				searchData: response
 			});
