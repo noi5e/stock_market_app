@@ -38,9 +38,8 @@ class SearchFormContainer extends React.Component {
 	}
 
 	loadBusinessData(searchTerm, callback) {
-		const searchTerm = encodeURIComponent(searchTerm);
 		// const jsonWebToken = encodeURIComponent(Auth.getToken());
-		const formData = `searchTerm=${searchTerm}`;
+		const formData = `searchTerm=${encodeURIComponent(searchTerm)}`;
 
 		const xhr = new XMLHttpRequest();
 		xhr.open('post', '/api')
