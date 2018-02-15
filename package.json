@@ -1,7 +1,7 @@
 {
-  "name": "nightlife_app",
+  "name": "stock_market_app",
   "version": "1.0.0",
-  "description": "Nightlife check-in app in fulfillment of learning project for FreeCodeCamp",
+  "description": "Stock market app in fulfillment of learning project for FreeCodeCamp",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
