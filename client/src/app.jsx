@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  browserHistory
-} from 'react-router-dom'
-
-import Main from './components/Main.jsx';
+import StockFormContainer from './components/StockFormContainer.jsx'
 
 class App extends React.Component {
 	render() {
 		return (
-			<Router history={browserHistory}>
-				<Route path="/" component={Main} />
-			</Router>
+			<div>
+				<div className="container">
+					<div className="header clearfix">
+						<h3 className="text-muted">FreeCodeCamp Stock Market App</h3>
+					</div>
+				</div>
+
+				<div className="container">
+					<StockFormContainer />
+					<footer className="footer">
+						<p>&copy; 2018 Will G</p>
+					</footer>
+				</div>
+			</div>
 		);
 	}
 }

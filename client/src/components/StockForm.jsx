@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormGroup, ControlLabel, FormControl, Button, InputGroup, Glyphicon } from 'react-bootstrap';
-import bootstrap from '../../../server/static/css/bootstrap.css'
-import style from '../../../server/static/css/style.css'
 
-class SearchForm extends React.Component {
+class StockForm extends React.Component {
 	render() {
 		return (
 			<form onSubmit={this.props.onSubmit}>
 				<FormGroup controlId="searchTerm">
-					<ControlLabel>Search for nightlife near you.</ControlLabel>
+					<ControlLabel>Enter a stock ticker symbol to add it to the chart:</ControlLabel>
 					<InputGroup>
 						<FormControl type="text" value={this.props.searchTerm} onChange={this.props.onChange} />
 						<InputGroup.Button>
@@ -22,11 +20,10 @@ class SearchForm extends React.Component {
 	}
 }
 
-SearchForm.propTypes = {
+StockForm.propTypes = {
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
-	errors: PropTypes.object.isRequired,
 	searchTerm: PropTypes.string.isRequired
 }
 
-export default SearchForm;
+export default StockForm;

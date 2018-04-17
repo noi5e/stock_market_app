@@ -1,10 +1,17 @@
-<p>Nightlife check-in app in fulfillment of learning project for FreeCodeCamp: https://www.freecodecamp.org/challenges/build-a-nightlife-coordination-app. Uses the Yelp Fusion API.</p>
+<p>Stock market app in fulfillment of learning project for FreeCodeCamp: https://www.freecodecamp.org/challenges/chart-the-stock-market</p>
 
 <ul>
-<li>User Story: As an unauthenticated user, I can view all bars in my area.</li>
-<li>User Story: As an authenticated user, I can add myself to a bar to indicate I am going there tonight.</li>
-<li>User Story: As an authenticated user, I can remove myself from a bar if I no longer want to go there.</li>
-<li>User Story: As an unauthenticated user, when I login I should not have to search again.</li>
+<li>User Story: I can view a graph displaying the recent trend lines for each added stock.</li>
+<li>User Story: I can add new stocks by their symbol name.</li>
+<li>User Story: I can remove stocks.</li>
+<li>User Story: I can see changes in real-time when any other user adds or removes a stock. For this you will need to use Web Sockets.</li>
 </ul>
 
 <p>Sample deployment here: https://thawing-mountain-66395.herokuapp.com/</p>
+
+<!-- 
+
+https://github.com/Olical/react-faux-dom
+https://codesandbox.io/s/JqYGAqlEJ
+
+-->
