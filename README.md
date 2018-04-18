@@ -7,9 +7,14 @@
 <li>User Story: I can see changes in real-time when any other user adds or removes a stock. For this you will need to use Web Sockets.</li>
 </ul>
 
-<p>Sample deployment here: https://thawing-mountain-66395.herokuapp.com/</p>
+<p>Sample deployment here: https://whispering-citadel-61344.herokuapp.com/</p>
 
 <!-- 
+
+PREP APP FOR DEPLOYMENT:
+index.js: toggle process.env mongo variable
+api.js: toggle quandl api key variable
+index.html: toggle css src.
 
 https://github.com/Olical/react-faux-dom
 https://codesandbox.io/s/JqYGAqlEJ
