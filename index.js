@@ -33,40 +33,40 @@ app.use(function(request, response) {
 	response.send({ msg: "hello" });
 });
 
-// webSocketServer.on('connection', function connection(webSocket, request) {
-// 	webSocket.isAlive = true;
+webSocketServer.on('connection', function connection(webSocket, request) {
+	webSocket.isAlive = true;
 
-// 	webSocket.on('pong', function() {
-// 		webSocket.isAlive = true;
-// 	});
+	webSocket.on('pong', function() {
+		webSocket.isAlive = true;
+	});
 
-// 	webSocket.on('message', function incoming(message) {
-// 		console.log('received: %s', message);
+	webSocket.on('message', function incoming(message) {
+		console.log('received: %s', message);
 
-// 		var broadcastRegex = /^broadcast\:/;
+		var broadcastRegex = /^broadcast\:/;
 
-// 		if (broadcastRegex.test(message)) {
-// 			message = message.replace(broadcastRegex, '');
+		if (broadcastRegex.test(message)) {
+			message = message.replace(broadcastRegex, '');
 
-// 			webSocketServer.clients.forEach(function(client) {
-// 				if (client != webSocket) {
-// 					client.send('Hello, broadcast message: ' + message);
-// 				}
-// 			});
-// 		} else {
-// 			webSocket.send('Hello, you sent -> ' + message);
-// 		}
-// 	});
+			webSocketServer.clients.forEach(function(client) {
+				if (client != webSocket) {
+					client.send('Hello, broadcast message: ' + message);
+				}
+			});
+		} else {
+			webSocket.send('Hello, you sent -> ' + message);
+		}
+	});
 
-// 	setInterval(function() {
-// 		webSocketServer.clients.forEach(function(client) {
-// 			if (!client.isAlive) { return client.terminate(); };
+	setInterval(function() {
+		webSocketServer.clients.forEach(function(client) {
+			if (!client.isAlive) { return client.terminate(); };
 
-// 			client.isAlive = false;
-// 			client.ping(null, false, true);
-// 		});
-// 	}, 10000);
-// });
+			client.isAlive = false;
+			client.ping(null, false, true);
+		});
+	}, 10000);
+});
 
 server.listen(process.env.PORT || 8080, function () {
   console.log('Example app listening on port 8080!');
