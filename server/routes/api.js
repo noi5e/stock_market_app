@@ -5,7 +5,7 @@ const https = require('https');
 const querystring = require('querystring');
 const randomColor = require('randomcolor');
 
-var webSocket = require('../index.js');
+var webSocket = require('../../index.js');
 
 var State = require('../models/state');
 
