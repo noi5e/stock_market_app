@@ -5,10 +5,20 @@ const https = require('https');
 const querystring = require('querystring');
 const randomColor = require('randomcolor');
 
+var webSocket = require('../index.js');
+
 var State = require('../models/state');
 
 // const quandlApiKey = encodeURIComponent(process.env.QUANDL_API_KEY);
 const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
+
+router.post('/remove_stock_ticker', function(request, response, next) {
+	webSocket.sendMessage('This is a message from api.js', function(error) {
+		if (error) { console.log('error from api.js: ' + error); }
+	});
+	
+	response.send([]);
+});
 
 router.post('/submit_stock_ticker', function(request, response, next) {
 
