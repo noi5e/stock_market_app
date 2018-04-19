@@ -71,3 +71,15 @@ webSocketServer.on('connection', function connection(webSocket, request) {
 server.listen(process.env.PORT || 8080, function () {
   console.log('Example app listening on port 8080!');
 });
+
+module.exports = {
+  sendMessage: function(message, callback) {
+    return webSocketServer.on('connection', function(webSocket) {
+      webSocket.send(message, callback);
+      
+      webSocket.on('close', function() {
+        console.log('websocket connection from api.js closed.')
+      });
+    });
+  }
+}
