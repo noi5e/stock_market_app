@@ -15,6 +15,7 @@ PREP APP FOR DEPLOYMENT:
 index.js: toggle process.env mongo variable
 api.js: toggle quandl api key variable
 index.html: toggle css src.
+StockFormContainer.jsx: toggle ws to wss
 
 https://github.com/Olical/react-faux-dom
 https://codesandbox.io/s/JqYGAqlEJ

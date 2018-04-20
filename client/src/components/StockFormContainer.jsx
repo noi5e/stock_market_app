@@ -23,7 +23,7 @@ class StockFormContainer extends React.Component {
 		// https://www.npmjs.com/package/react-websocket
 		// https://github.com/rajiff/ws-react-demo/blob/master/public/components/WebSocketClient.jsx
 
-		this.socket = new WebSocket('wss://' + window.location.host);
+		this.socket = new WebSocket('ws://' + window.location.host);
 
 		this.socket.addEventListener('open', (e) => {
 			this.socket.send('New client opened up a socket!', (error) => {
@@ -75,7 +75,21 @@ class StockFormContainer extends React.Component {
 	handleRemove(event) {
 		event.preventDefault();
 
-		console.log(event.target.id)
+		const stockTicker = `stockTicker=${event.target.id}`;
+
+		const xhr = new XMLHttpRequest();
+		xhr.open('post', '/api/remove_stock_ticker');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+		xhr.addEventListener('load', () => {
+			if (xhr.status === 200) {
+				console.log(JSON.parse(xhr.response));
+			} else {
+				console.log('error from /api/remove_stock_ticker: ' + xhr.response);
+			}
+		});
+
+		xhr.send(stockTicker);
 	}
 
 	handleSubmit(event) {
