@@ -1,37 +1,23 @@
-var express = require('express');
+const express = require('express');
 var router = new express.Router();
 
-var https = require('https');
-var querystring = require('querystring');
+const https = require('https');
+const querystring = require('querystring');
+const randomColor = require('randomcolor');
 
-var randomColor = require('randomcolor');
-
-var WebSocket = require('ws');
+var webSocket = require('../../index.js');
 
 var State = require('../models/state');
 
 // const quandlApiKey = encodeURIComponent(process.env.QUANDL_API_KEY);
-var quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
+const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
 
 router.post('/remove_stock_ticker', function(request, response, next) {
-	console.log(request.body.stockTicker);
-
-	const webSocket = new WebSocket('wss://randomfoobar.com');
-
-	webSocket.on('open', function() {
-		console.log('api.js connected to websocket');
-		webSocket.send(Date.now());
+	webSocket.sendMessage('This is a message from api.js', function(error) {
+		if (error) { console.log('error from api.js: ' + error); }
 	});
-
-	webSocket.on('close', function() {
-		console.log('api.js disconnected from websocket');
-	});
-
-	webSocket.on('message', function(message) {
-		console.log('message at api.js: ' + message);
-	});
-
-	response.json([]);
+	
+	response.send([]);
 });
 
 router.post('/submit_stock_ticker', function(request, response, next) {
