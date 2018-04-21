@@ -77,6 +77,8 @@ class StockFormContainer extends React.Component {
 
 		const stockTicker = `stockTicker=${event.target.id}`;
 
+		console.log(stockTicker);
+
 		const xhr = new XMLHttpRequest();
 		xhr.open('post', '/api/remove_stock_ticker');
 		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

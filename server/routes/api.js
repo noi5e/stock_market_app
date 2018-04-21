@@ -5,7 +5,7 @@ const https = require('https');
 const querystring = require('querystring');
 const randomColor = require('randomcolor');
 
-const index = require('../../index.js')
+const wsInstance = require('../../index.js');
 
 var State = require('../models/state');
 
@@ -13,16 +13,22 @@ var State = require('../models/state');
 const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
 
 router.post('/remove_stock_ticker', function(request, response, next) {
-	// webSocket.sendMessage('This is a message from api.js', function(error) {
-	// 	if (error) { console.log('error from api.js: ' + error); }
-	// });
-	
-	// console.log(index.webSocketServer);
+	State.findOne({ name: 'original' }, (error, document) => {
+		if (error) { console.log(error); }
 
-	index.webSocketServer.clients.forEach(function(client) {
-		client.send('Yeah!');		
+		for (var i = 0; i < document.stockList.length; i ++) {
+			if (document.stockList[i].name === request.body.stockTicker) {
+
+				document.stockList.splice(i, 1);
+
+				wsInstance.webSocketServer.clients.forEach(function(client) {
+					client.send('newState: ' + JSON.stringify(document.stockList));		
+				});
+
+				document.save();
+			}
+		}
 	});
-
 
 	response.send([]);
 });
