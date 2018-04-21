@@ -32,7 +32,21 @@ class StockFormContainer extends React.Component {
 		});
 
 		this.socket.addEventListener('message', (e) => {
-			console.log('Message: ' + e.data);
+			var message = e.data;
+
+			var newStateRegex = /^newState\:/;
+
+			console.log(message);
+
+			if (newStateRegex.test(message)) {
+				message = message.replace(newStateRegex, '');
+
+				console.log(JSON.parse(message));
+
+				this.setState({
+					stockData: JSON.parse(message).sort((a, b) => { return a.name > b.name; })
+				});
+			}
 		});
 
 		const xhr = new XMLHttpRequest();
@@ -76,8 +90,6 @@ class StockFormContainer extends React.Component {
 		event.preventDefault();
 
 		const stockTicker = `stockTicker=${event.target.id}`;
-
-		console.log(stockTicker);
 
 		const xhr = new XMLHttpRequest();
 		xhr.open('post', '/api/remove_stock_ticker');
@@ -128,7 +140,10 @@ class StockFormContainer extends React.Component {
 						console.log("no such stock ticker.")
 					} else {
 						// parses the response from API, adds it to state's list of stocks, then sorts state's list in alphabetical order
-						this.setState({ stockData: [...this.state.stockData, response].sort((a, b) => { return a.name > b.name; }) });
+						this.setState({ 
+							stockData: [...this.state.stockData, response].sort((a, b) => { return a.name > b.name; }),
+							searchTerm: ''
+						});
 					}
 				} else {
 					console.log('error from /api/submit_stock_ticker: ' + xhr.response);

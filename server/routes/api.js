@@ -21,8 +21,16 @@ router.post('/remove_stock_ticker', function(request, response, next) {
 
 				document.stockList.splice(i, 1);
 
+				const broadcastData = document.stockList.map(function(datum) {
+					return {
+						color: datum.color,
+						name: datum.name,
+						values: datum.values
+					};
+				});
+
 				wsInstance.webSocketServer.clients.forEach(function(client) {
-					client.send('newState: ' + JSON.stringify(document.stockList));		
+					client.send('newState:' + JSON.stringify(broadcastData));		
 				});
 
 				document.save();
