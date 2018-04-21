@@ -5,7 +5,7 @@ const https = require('https');
 const querystring = require('querystring');
 const randomColor = require('randomcolor');
 
-var webSocket = require('../../index.js');
+const index = require('../../index.js')
 
 var State = require('../models/state');
 
@@ -13,10 +13,17 @@ var State = require('../models/state');
 const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
 
 router.post('/remove_stock_ticker', function(request, response, next) {
-	webSocket.sendMessage('This is a message from api.js', function(error) {
-		if (error) { console.log('error from api.js: ' + error); }
-	});
+	// webSocket.sendMessage('This is a message from api.js', function(error) {
+	// 	if (error) { console.log('error from api.js: ' + error); }
+	// });
 	
+	// console.log(index.webSocketServer);
+
+	index.webSocketServer.clients.forEach(function(client) {
+		client.send('Yeah!');		
+	});
+
+
 	response.send([]);
 });
 
