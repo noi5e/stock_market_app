@@ -14,7 +14,7 @@ const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
 
 router.post('/remove_stock_ticker', function(request, response, next) {
 	State.findOne({ name: 'original' }, (error, document) => {
-		if (error) { console.log(error); }
+		if (error) { console.log('couldn\'t find mongo document named "original": ' + error); }
 
 		for (var i = 0; i < document.stockList.length; i ++) {
 			if (document.stockList[i].name === request.body.stockTicker) {
@@ -34,11 +34,11 @@ router.post('/remove_stock_ticker', function(request, response, next) {
 				});
 
 				document.save();
+
+				response.send(broadcastData);
 			}
 		}
 	});
-
-	response.send([]);
 });
 
 router.post('/submit_stock_ticker', function(request, response, next) {
@@ -87,11 +87,31 @@ router.post('/submit_stock_ticker', function(request, response, next) {
 				}
 
 				State.findOne({ name: 'original' }, function(error, document) {
-					document.stockList.push(finishedData);
-					document.save();
-				});
 
-				response.json(finishedData);
+					document.stockList.push(finishedData);
+
+					const broadcastData = document.stockList.map(function(datum) {
+						return {
+							color: datum.color,
+							name: datum.name,
+							values: datum.values
+						};
+					});
+
+					wsInstance.webSocketServer.clients.forEach(function(client) {
+						client.send('newState:' + JSON.stringify(broadcastData));		
+					});
+
+					document.save();
+
+					response.send(broadcastData);
+
+					// wsInstance.webSocketServer.clients.forEach(function(client) {
+					// 	client.send('newState:' + JSON.stringify(finishedData));		
+					// });
+
+					// response.json(document.stockList);
+				});
 			}
 		});
 	});

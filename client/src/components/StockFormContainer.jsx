@@ -18,6 +18,32 @@ class StockFormContainer extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	compareOldStateWithNewState(oldState, newState) {
+		let statesAreSame = true;
+
+		if (!newState) {
+			statesAreSame = false;
+		}
+
+		if (newState.length !== oldState.length) {
+			statesAreSame = false;
+		}
+
+		for (var i = 0; i < newState.length; i++) {
+			if (newState[i] !== oldState[i]) {
+				statesAreSame = false;
+			}
+		}
+
+		if (!statesAreSame) {
+			this.setState({
+				stockData: newState.sort((a, b) => { return a.name > b.name; })
+			});
+		} else {
+			console.log('received a new state, but it was the same as current state.');
+		}
+	}
+
 	componentDidMount() {
 		// https://stackoverflow.com/questions/38122068/how-react-js-acts-as-a-websocket-client
 		// https://www.npmjs.com/package/react-websocket
@@ -27,25 +53,19 @@ class StockFormContainer extends React.Component {
 
 		this.socket.addEventListener('open', (e) => {
 			this.socket.send('New client opened up a socket!', (error) => {
-				console.log('Error: ' + error);
+				console.log('Error sending websocket message to server: ' + error);
 			});
 		});
 
 		this.socket.addEventListener('message', (e) => {
-			var message = e.data;
-
-			var newStateRegex = /^newState\:/;
-
-			console.log(message);
+			let message = e.data;
+			let newStateRegex = /^newState\:/;
 
 			if (newStateRegex.test(message)) {
 				message = message.replace(newStateRegex, '');
+				let messageData = JSON.parse(message);
 
-				console.log(JSON.parse(message));
-
-				this.setState({
-					stockData: JSON.parse(message).sort((a, b) => { return a.name > b.name; })
-				});
+				this.compareOldStateWithNewState(this.state.stockData, messageData);
 			}
 		});
 
@@ -55,15 +75,13 @@ class StockFormContainer extends React.Component {
 
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
-				console.log('response from /api/get_master_state:');
-				console.log(JSON.parse(xhr.response));
-
 				this.setState({ 
-					stockData: JSON.parse(xhr.response).sort((a, b) => { return a.name > b.name; }),
 					isLoaded: true
 				});
+
+				this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response));
 			} else {
-				console.log('Error contacting API: ' + xhr.response);
+				console.log('Error contacting app API: ' + xhr.response);
 			}
 		});
 
@@ -97,7 +115,7 @@ class StockFormContainer extends React.Component {
 
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
-				console.log(JSON.parse(xhr.response));
+				this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response));
 			} else {
 				console.log('error from /api/remove_stock_ticker: ' + xhr.response);
 			}
@@ -141,9 +159,10 @@ class StockFormContainer extends React.Component {
 					} else {
 						// parses the response from API, adds it to state's list of stocks, then sorts state's list in alphabetical order
 						this.setState({ 
-							stockData: [...this.state.stockData, response].sort((a, b) => { return a.name > b.name; }),
 							searchTerm: ''
 						});
+
+						this.compareOldStateWithNewState(this.state.stockData, response);
 					}
 				} else {
 					console.log('error from /api/submit_stock_ticker: ' + xhr.response);
