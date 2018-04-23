@@ -9,8 +9,8 @@ const wsInstance = require('../../index.js');
 
 var State = require('../models/state');
 
-// const quandlApiKey = encodeURIComponent(process.env.QUANDL_API_KEY);
-const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
+const quandlApiKey = encodeURIComponent(process.env.QUANDL_API_KEY);
+// const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
 
 router.post('/remove_stock_ticker', function(request, response, next) {
 	State.findOne({ name: 'original' }, (error, document) => {
