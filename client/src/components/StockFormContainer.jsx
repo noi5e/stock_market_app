@@ -19,26 +19,26 @@ class StockFormContainer extends React.Component {
 	}
 
 	compareOldStateWithNewState(oldState, newState) {
-		const newState = newState.sort((a, b) => { return a.name > b.name; });
+		const alphabeticNewState = newState.sort((a, b) => { return a.name > b.name; });
 		
 		let statesAreSame = true;
 
-		if (!newState) {
+		if (!alphabeticNewState) {
 			statesAreSame = false;
 		}
 
-		if (newState.length !== oldState.length) {
+		if (alphabeticNewState.length !== oldState.length) {
 			statesAreSame = false;
 		}
 
-		for (var i = 0; i < newState.length; i++) {
-			if (newState[i] !== oldState[i]) {
+		for (var i = 0; i < alphabeticNewState.length; i++) {
+			if (alphabeticNewState[i] !== oldState[i]) {
 				statesAreSame = false;
 			}
 		}
 
 		if (!statesAreSame) {
-			return newState.sort((a, b) => { return a.name > b.name; });
+			return alphabeticNewState.sort((a, b) => { return a.name > b.name; });
 		} else {
 			return oldState;
 		}
