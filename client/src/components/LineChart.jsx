@@ -132,12 +132,11 @@ class LineChart extends React.Component {
 					tooltip.html(datum.year + ' - ' + months[datum.month - 1] + '<br />' + Math.floor((datum.variance + baseTemperature) * 1000) / 1000 + '&#8451<br />' + datum.variance + '&#8451')
 						.style('left', (d3.event.pageX + 10) + 'px')
 						.style('top', (d3.event.pageY - 30) + 'px');
-					})
-					.on('mouseout', function() {
-						tooltip.transition()
-							.duration(500)
-							.style('opacity', 0);
-					});
+				})
+				.on('mouseout', function() {
+					tooltip.transition()
+						.duration(500)
+						.style('opacity', 0);
 				});
 
 		} else {
