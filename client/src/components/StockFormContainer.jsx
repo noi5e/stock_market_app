@@ -36,11 +36,9 @@ class StockFormContainer extends React.Component {
 		}
 
 		if (!statesAreSame) {
-			this.setState({
-				stockData: newState.sort((a, b) => { return a.name > b.name; })
-			});
+			return newState.sort((a, b) => { return a.name > b.name; });
 		} else {
-			console.log('received a new state, but it was the same as current state.');
+			return oldState;
 		}
 	}
 
@@ -64,8 +62,10 @@ class StockFormContainer extends React.Component {
 			if (newStateRegex.test(message)) {
 				message = message.replace(newStateRegex, '');
 				let messageData = JSON.parse(message);
-
-				this.compareOldStateWithNewState(this.state.stockData, messageData);
+				
+				this.setState({
+					stockData: this.compareOldStateWithNewState(this.state.stockData, messageData)
+				});
 			}
 		});
 
@@ -78,8 +78,10 @@ class StockFormContainer extends React.Component {
 				this.setState({ 
 					isLoaded: true
 				});
-
-				this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response));
+				
+				this.setState({
+					stockData: this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response))
+				});
 			} else {
 				console.log('Error contacting app API: ' + xhr.response);
 			}
@@ -115,7 +117,9 @@ class StockFormContainer extends React.Component {
 
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
-				this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response));
+				this.setState({
+					stockData: this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response))
+				});
 			} else {
 				console.log('error from /api/remove_stock_ticker: ' + xhr.response);
 			}
@@ -158,11 +162,10 @@ class StockFormContainer extends React.Component {
 						console.log("no such stock ticker.")
 					} else {
 						// parses the response from API, adds it to state's list of stocks, then sorts state's list in alphabetical order
-						this.setState({ 
-							searchTerm: ''
+						this.setState({
+							searchTerm: '',
+							stockData: this.compareOldStateWithNewState(this.state.stockData, response)
 						});
-
-						this.compareOldStateWithNewState(this.state.stockData, response);
 					}
 				} else {
 					console.log('error from /api/submit_stock_ticker: ' + xhr.response);
