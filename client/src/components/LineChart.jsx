@@ -64,6 +64,10 @@ class LineChart extends React.Component {
 				.attr('height', outerHeight)
 				.attr('id', 'line-chart-svg');
 
+			var tooltip = svg.append('div')
+				.attr('class', 'tooltip')
+				.style('opacity', 0);
+			
 			var g = svg.append('g')
 				.attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
 
@@ -118,6 +122,23 @@ class LineChart extends React.Component {
 				.attr('class', 'line')
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
+			
+			g.selectAll('line)
+				.on('mousemove', function(datum) {
+					tooltip.transition()
+						.duration(200)
+						.style('opacity', 0.9);
+
+					tooltip.html(datum.year + ' - ' + months[datum.month - 1] + '<br />' + Math.floor((datum.variance + baseTemperature) * 1000) / 1000 + '&#8451<br />' + datum.variance + '&#8451')
+						.style('left', (d3.event.pageX + 10) + 'px')
+						.style('top', (d3.event.pageY - 30) + 'px');
+					})
+					.on('mouseout', function() {
+						tooltip.transition()
+							.duration(500)
+							.style('opacity', 0);
+					});
+				});
 
 		} else {
 
