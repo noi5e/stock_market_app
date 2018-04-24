@@ -3,6 +3,16 @@
   stroke-width: 2px;
 }
 
+#tooltip {
+  background-color: rgba(34, 34, 34, 0.8);
+  color: #ccc;
+  padding: 10px;
+/*   border-radius: 20px */
+  font-size: 14px;
+  text-align: center;
+  pointer-events: none;
+}
+
 #line-chart-container {
   text-align: center;
 }
