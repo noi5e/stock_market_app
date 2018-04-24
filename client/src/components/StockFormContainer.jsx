@@ -19,6 +19,8 @@ class StockFormContainer extends React.Component {
 	}
 
 	compareOldStateWithNewState(oldState, newState) {
+		const newState = newState.sort((a, b) => { return a.name > b.name; });
+		
 		let statesAreSame = true;
 
 		if (!newState) {
@@ -76,11 +78,8 @@ class StockFormContainer extends React.Component {
 		xhr.addEventListener('load', () => {
 			if (xhr.status === 200) {
 				this.setState({ 
+					stockData: this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response)),
 					isLoaded: true
-				});
-				
-				this.setState({
-					stockData: this.compareOldStateWithNewState(this.state.stockData, JSON.parse(xhr.response))
 				});
 			} else {
 				console.log('Error contacting app API: ' + xhr.response);
