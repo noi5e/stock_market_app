@@ -123,7 +123,7 @@ class LineChart extends React.Component {
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
 			
-			g.selectAll('line)
+			g.selectAll('line')
 				.on('mousemove', function(datum) {
 					tooltip.transition()
 						.duration(200)
