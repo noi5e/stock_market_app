@@ -12,8 +12,8 @@ var bodyParser = require('body-parser');
 
 var mongo = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost:27017/stock_market_app');
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost:27017/stock_market_app');
+// mongoose.connect(process.env.MONGODB_URI);
 
 // look for static files
 app.use(express.static('./server/static'));
@@ -73,16 +73,3 @@ server.listen(process.env.PORT || 8080, function () {
 });
 
 module.exports.webSocketServer = webSocketServer;
-
-// module.exports = {
-//   sendMessage: function(message, callback) {
-//     return webSocketServer.on('connection', function(webSocket) {
-//       webSocket.send(message, callback);
-      
-//       webSocket.on('close', function() {
-//         console.log('websocket connection from api.js closed.')
-//       });
-//     });
-//   }
-// }
-

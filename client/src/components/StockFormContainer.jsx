@@ -15,7 +15,9 @@ class StockFormContainer extends React.Component {
 		}
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleRemove = this.handleRemove.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.getMouseOverData = this.getMouseOverData.bind(this);
 	}
 
 	compareOldStateWithNewState(oldState, newState) {
@@ -49,7 +51,7 @@ class StockFormContainer extends React.Component {
 		// https://www.npmjs.com/package/react-websocket
 		// https://github.com/rajiff/ws-react-demo/blob/master/public/components/WebSocketClient.jsx
 
-		this.socket = new WebSocket('wss://' + window.location.host);
+		this.socket = new WebSocket('ws://' + window.location.host);
 
 		this.socket.addEventListener('open', (e) => {
 			this.socket.send('New client opened up a socket!', (error) => {
@@ -97,6 +99,10 @@ class StockFormContainer extends React.Component {
 		} catch (error) {
 			console.log('Error closing socket: ' + error);
 		}
+	}
+
+	getMouseOverData(eventData) {
+		console.log(eventData);
 	}
 
 	handleChange(event) {
@@ -203,7 +209,7 @@ class StockFormContainer extends React.Component {
 
 			return (
 				<div>
-					<LineChart stockData={this.state.stockData} />
+					<LineChart stockData={this.state.stockData} getMouseOverData={(d) => this.getMouseOverData(d)} />
 					<StockForm onSubmit={(e) => this.handleSubmit(e)} onChange={(e) => this.handleChange(e)} searchTerm={this.state.searchTerm} />
 					{stockContent}
 				</div>

@@ -14,6 +14,7 @@ class LineChart extends React.Component {
 	constructor(props) {
 		super(props);
 		this.renderOrUpdateChart = this.renderOrUpdateChart.bind(this);
+		this.getMouseOverData = this.getMouseOverData.bind(this);
 	}
 
 	componentDidMount() {
@@ -52,8 +53,16 @@ class LineChart extends React.Component {
 		return true;
 	}
 
+	getMouseOverData(data) {
+		console.log(data);
+	}
+
 	renderOrUpdateChart() {
+		// create a tooltip in react-faux-dom: https://github.com/Olical/react-faux-dom/issues/31
+
 		const stockData = this.props.stockData;
+
+		var self = this;
 
 		const faux = this.props.connectFauxDOM('div', 'chart');
 
@@ -123,21 +132,14 @@ class LineChart extends React.Component {
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
 			
-			g.selectAll('line')
+			g.selectAll('path')
 				.on('mousemove', function(datum) {
-					tooltip.transition()
-						.duration(200)
-						.style('opacity', 0.9);
-
-					tooltip.html(datum.year + ' - ' + months[datum.month - 1] + '<br />' + Math.floor((datum.variance + baseTemperature) * 1000) / 1000 + '&#8451<br />' + datum.variance + '&#8451')
-						.style('left', (d3.event.pageX + 10) + 'px')
-						.style('top', (d3.event.pageY - 30) + 'px');
+					self.props.getMouseOverData(datum);
+					// getMouseOverData({ pageX: d3.event.pageX, pageY: d3.event.pageY });
 				})
-				.on('mouseout', function() {
-					tooltip.transition()
-						.duration(500)
-						.style('opacity', 0);
-				});
+				// .on('mouseout', function() {
+
+				// });
 
 		} else {
 
