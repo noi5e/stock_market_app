@@ -90,10 +90,21 @@ class LineChart extends React.Component {
 
 		if (this.props.stockData.length > 0) {
 
+			var circleData = [];
+			
+			for (var i = 0; i < this.props.stockData.length; i++) {
+				for (var j = 0; j < this.props.stockData[i].values.length; j++) {
+					circleData.push({
+						date: this.props.stockData[i].values[j].date,
+						value: this.props.stockData[i].values[j].value,
+						color: this.props.stockData[i].color
+					});
+				}
+			}
+			
 			var x = d3.scaleTime().rangeRound([0, innerWidth]),
 				y = d3.scaleLinear().rangeRound([innerHeight, 0]);
 			var line = d3.line()
-// 				.curve(d3.curveBasis)
 				.x(function(datum) { return x(datum['date']); })
 				.y(function(datum) { return y(datum['value']); });
 
@@ -131,19 +142,16 @@ class LineChart extends React.Component {
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
 
-			for (var i = 0; i < this.props.stockData.length; i++) {
-				console.log(this.props.stockData[i]);
 				
-				g.selectAll('.dot')
-					.data(this.props.stockData[i].values)
-					.enter()
-					.append("circle")
-					.attr("class", "dot")
-					.attr("r", 3.5)
-					.attr("cx", function(datum) { return x(datum['date']); })
-					.attr("cy", function(datum) { return y(datum['value']); })
-// 					.style("fill", function(stock) { return this.props.stockData[i].color; });	
-			}
+			g.selectAll('.dot')
+				.data(circleData)
+				.enter()
+				.append("circle")
+				.attr("class", "dot")
+				.attr("r", 3.5)
+				.attr("cx", function(datum) { return x(datum['date']); })
+				.attr("cy", function(datum) { return y(datum['value']); })
+// 					.style("fill", function(stock) { return this.props.stockData[i].color; });
 			
 			g.selectAll('.line')
 				.on('mousemove', function(datum) {
