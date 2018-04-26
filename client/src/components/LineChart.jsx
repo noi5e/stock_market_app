@@ -137,7 +137,7 @@ class LineChart extends React.Component {
 				.append("circle")
 				.attr("class", "dot")
 				.attr("r", 3.5)
-				.attr("cx", function(datum) { return x(datum['date']); })
+				.attr("cx", function(datum) { console.log(datum); return x(datum['date']); })
 				.attr("cy", function(datum) { return y(datum['value']); })
 				.style("fill", function(stock) { return stock['color']; });
 			
