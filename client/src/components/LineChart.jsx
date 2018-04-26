@@ -130,6 +130,16 @@ class LineChart extends React.Component {
 				.attr('class', 'line')
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
+
+			svg.selectAll(".dot")
+				.data(this.props.data)
+				.enter()
+				.append("circle")
+				.attr("class", "dot")
+				.attr("r", 3.5)
+				.attr("cx", function(datum) { return x(datum['date']); })
+				.attr("cy", function(datum) { return y(datum['value']); })
+				.style("fill", function(stock) { return stock['color']; });
 			
 			g.selectAll('.line')
 				.on('mousemove', function(datum) {
