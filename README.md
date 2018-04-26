@@ -16,7 +16,4 @@ index.js: toggle process.env mongo variable
 api.js: toggle quandl api key variable
 StockFormContainer.jsx: toggle ws to wss
 
-https://github.com/Olical/react-faux-dom
-https://codesandbox.io/s/JqYGAqlEJ
-
 -->
