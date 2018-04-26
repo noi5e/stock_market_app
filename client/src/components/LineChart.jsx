@@ -14,7 +14,6 @@ class LineChart extends React.Component {
 	constructor(props) {
 		super(props);
 		this.renderOrUpdateChart = this.renderOrUpdateChart.bind(this);
-		this.getMouseOverData = this.getMouseOverData.bind(this);
 	}
 
 	componentDidMount() {
