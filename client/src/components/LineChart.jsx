@@ -131,7 +131,7 @@ class LineChart extends React.Component {
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
 
-			svg.selectAll(".dot")
+			g.selectAll(".dot")
 				.data(this.props.data)
 				.enter()
 				.append("circle")
