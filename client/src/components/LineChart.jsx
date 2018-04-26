@@ -53,9 +53,9 @@ class LineChart extends React.Component {
 		return true;
 	}
 
-	getMouseOverData(data) {
-		console.log(data);
-	}
+// 	getMouseOverData(data) {
+// 		console.log(data);
+// 	}
 
 	renderOrUpdateChart() {
 		// create a tooltip in react-faux-dom: https://github.com/Olical/react-faux-dom/issues/31
@@ -134,8 +134,7 @@ class LineChart extends React.Component {
 			
 			g.selectAll('path')
 				.on('mousemove', function(datum) {
-					self.props.getMouseOverData(datum);
-					// getMouseOverData({ pageX: d3.event.pageX, pageY: d3.event.pageY });
+					self.props.getMouseOverData({ pageX: d3.event.pageX, pageY: d3.event.pageY });
 				})
 				// .on('mouseout', function() {
 
