@@ -93,7 +93,7 @@ class LineChart extends React.Component {
 			var x = d3.scaleTime().rangeRound([0, innerWidth]),
 				y = d3.scaleLinear().rangeRound([innerHeight, 0]);
 			var line = d3.line()
-				.curve(d3.curveBasis)
+// 				.curve(d3.curveBasis)
 				.x(function(datum) { return x(datum['date']); })
 				.y(function(datum) { return y(datum['value']); });
 
