@@ -151,7 +151,7 @@ class LineChart extends React.Component {
 				.attr("r", 3.5)
 				.attr("cx", function(datum) { return x(datum['date']); })
 				.attr("cy", function(datum) { return y(datum['value']); })
-				.style("fill", function(stock) { return datum.color; });
+				.style("fill", function(datum) { return datum.color; });
 			
 			g.selectAll('.line')
 				.on('mousemove', function(datum) {
