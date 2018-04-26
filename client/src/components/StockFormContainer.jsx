@@ -51,7 +51,7 @@ class StockFormContainer extends React.Component {
 		// https://www.npmjs.com/package/react-websocket
 		// https://github.com/rajiff/ws-react-demo/blob/master/public/components/WebSocketClient.jsx
 
-		this.socket = new WebSocket('ws://' + window.location.host);
+		this.socket = new WebSocket('wss://' + window.location.host);
 
 		this.socket.addEventListener('open', (e) => {
 			this.socket.send('New client opened up a socket!', (error) => {
@@ -102,7 +102,7 @@ class StockFormContainer extends React.Component {
 	}
 
 	getMouseOverData(eventData) {
-		console.log(eventData);
+		console.log('Here\'s the mouseover info: ' + JSON.stringify(eventData));
 	}
 
 	handleChange(event) {
