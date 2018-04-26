@@ -131,15 +131,19 @@ class LineChart extends React.Component {
 				.attr('d', function(stock) { return line(stock['values']); })
 				.style('stroke', function(stock) { return stock['color']; });
 
-			g.selectAll('.dot')
-				.data(this.props.stockData)
-				.enter()
-				.append("circle")
-				.attr("class", "dot")
-				.attr("r", 3.5)
-				.attr("cx", function(datum) { console.log(datum); return x(datum['date']); })
-				.attr("cy", function(datum) { return y(datum['value']); })
-				.style("fill", function(stock) { return stock['color']; });
+			for (var i = 0; i < this.props.stockData.length; i++) {
+				console.log(this.props.stockData[i]);
+				
+				g.selectAll('.dot')
+					.data(this.props.stockData[i].values)
+					.enter()
+					.append("circle")
+					.attr("class", "dot")
+					.attr("r", 3.5)
+					.attr("cx", function(datum) { return x(datum['date']); })
+					.attr("cy", function(datum) { return y(datum['value']); })
+					.style("fill", function(stock) { return this.props.stockData[i].color; });	
+			}
 			
 			g.selectAll('.line')
 				.on('mousemove', function(datum) {
