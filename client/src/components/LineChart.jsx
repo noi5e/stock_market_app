@@ -153,7 +153,7 @@ class LineChart extends React.Component {
 				.attr("cy", function(datum) { return y(datum['value']); })
 				.style("fill", function(datum) { return datum.color; });
 			
-			g.selectAll('.line')
+			g.selectAll('.dot')
 				.on('mousemove', function(datum) {
 					console.log(datum);
 					self.props.getMouseOverData({ pageX: d3.event.pageX, pageY: d3.event.pageY });
