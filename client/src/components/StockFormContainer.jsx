@@ -2,6 +2,7 @@ import React from 'react';
 import LineChart from './LineChart.jsx';
 import StockForm from './StockForm.jsx';
 import Stock from './Stock.jsx';
+import Tooltip from './Tooltip.jsx';
 
 class StockFormContainer extends React.Component {
 
@@ -11,6 +12,7 @@ class StockFormContainer extends React.Component {
 		this.state = {
 			searchTerm: '',
 			stockData: [],
+			tooltipData: {},
 			isLoaded: false
 		}
 
@@ -212,6 +214,7 @@ class StockFormContainer extends React.Component {
 					<LineChart stockData={this.state.stockData} getMouseOverData={(d) => this.getMouseOverData(d)} />
 					<StockForm onSubmit={(e) => this.handleSubmit(e)} onChange={(e) => this.handleChange(e)} searchTerm={this.state.searchTerm} />
 					{stockContent}
+					<Tooltip tooltipData={this.state.tooltipData} />
 				</div>
 			);
 
