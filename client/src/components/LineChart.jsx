@@ -93,7 +93,8 @@ class LineChart extends React.Component {
 					circleData.push({
 						date: this.props.stockData[i].values[j].date,
 						value: this.props.stockData[i].values[j].value,
-						color: this.props.stockData[i].color
+						color: this.props.stockData[i].color,
+						name: this.props.stockData[i].name
 					});
 				}
 			}
@@ -156,7 +157,8 @@ class LineChart extends React.Component {
 						pageY: d3.event.pageY,
 						date: datum.date,
 						value: datum.value,
-						color: datum.color
+						color: datum.color,
+						name: datum.name
 					});
 				})
 				.on('mouseout', function() {
