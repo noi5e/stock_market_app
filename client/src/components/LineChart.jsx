@@ -52,10 +52,6 @@ class LineChart extends React.Component {
 		return true;
 	}
 
-// 	getMouseOverData(data) {
-// 		console.log(data);
-// 	}
-
 	renderOrUpdateChart() {
 		// create a tooltip in react-faux-dom: https://github.com/Olical/react-faux-dom/issues/31
 
@@ -163,9 +159,9 @@ class LineChart extends React.Component {
 						color: datum.color
 					});
 				})
-				// .on('mouseout', function() {
-
-				// });
+				.on('mouseout', function() {
+					self.props.handleMouseOut();
+				});
 
 		} else {
 
