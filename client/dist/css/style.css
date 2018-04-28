@@ -3,13 +3,16 @@
   stroke-width: 2px;
 }
 
+.dot {
+  cursor: pointer;
+}
+
 #tooltip {
   background-color: rgba(34, 34, 34, 0.8);
   color: #ccc;
   padding: 5px;
   font-size: 12px;
   pointer-events: none;
-  border-left: 1px;
 }
 
 #line-chart-container {
