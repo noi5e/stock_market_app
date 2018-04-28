@@ -20,7 +20,7 @@ class Tooltip extends React.Component {
 		} else {
 			const divStyle = {
 				opacity: 0.9,
-				position: absolute,
+				position: 'absolute',
 				left: this.props.tooltipData.pageX + 10 + 'px',
 				top: this.props.tooltipData.pageY - 30 + 'px'
 			}
