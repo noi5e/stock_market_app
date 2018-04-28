@@ -7,8 +7,28 @@ class Tooltip extends React.Component {
 	}
 	
 	render() {
-		return <div id='tooltip'>
-		       </div>;
+		const objectIsEmpty = true;
+		
+		for (var key in this.props.tooltipData) {
+			if (this.props.tooltipData.hasOwnProperty(key)) {
+				objectIsEmpty = false;
+			}
+		}
+		
+		if (objectIsEmpty) {
+			return null;
+		} else {
+			const divStyle = {
+				opacity: 0.9,
+				left: this.props.tooltipData.pageX + 10 + 'px',
+				top: this.props.tooltipData.pageY - 30 + 'px',
+			}
+			
+			return <div id='tooltip' style={divStyle}>
+			               {this.props.tooltipData.date}<br />
+			               {this.props.tooltipData.value}
+		       	       </div>;	
+		}
 	}
 }
 
