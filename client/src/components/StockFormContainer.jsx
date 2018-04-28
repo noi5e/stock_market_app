@@ -19,6 +19,7 @@ class StockFormContainer extends React.Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.handleRemove = this.handleRemove.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleMouseOut = this.handleMouseOut.bind(this);
 		this.getMouseOverData = this.getMouseOverData.bind(this);
 	}
 
@@ -104,12 +105,17 @@ class StockFormContainer extends React.Component {
 	}
 
 	getMouseOverData(eventData) {
-		console.log('Here\'s the mouseover info: ' + JSON.stringify(eventData));
 		this.setState({
 			tooltipData: eventData
 		});
 	}
 
+	handleMouseOut() {
+		this.setState({
+			tooltipData: {}	
+		});
+	}
+	
 	handleChange(event) {
 		this.setState({
 			searchTerm: event.target.value
@@ -214,7 +220,7 @@ class StockFormContainer extends React.Component {
 
 			return (
 				<div>
-					<LineChart stockData={this.state.stockData} getMouseOverData={(d) => this.getMouseOverData(d)} />
+					<LineChart stockData={this.state.stockData} getMouseOverData={(d) => this.getMouseOverData(d)} handleMouseOut={this.handleMouseOut} />
 					<StockForm onSubmit={(e) => this.handleSubmit(e)} onChange={(e) => this.handleChange(e)} searchTerm={this.state.searchTerm} />
 					{stockContent}
 					<Tooltip tooltipData={this.state.tooltipData} />
