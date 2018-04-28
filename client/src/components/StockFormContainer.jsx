@@ -105,6 +105,9 @@ class StockFormContainer extends React.Component {
 
 	getMouseOverData(eventData) {
 		console.log('Here\'s the mouseover info: ' + JSON.stringify(eventData));
+		this.setState({
+			tooltipData: eventData
+		});
 	}
 
 	handleChange(event) {
