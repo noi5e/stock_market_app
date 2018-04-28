@@ -7,7 +7,7 @@ class Tooltip extends React.Component {
 	}
 	
 	render() {
-		const objectIsEmpty = true;
+		let objectIsEmpty = true;
 		
 		for (var key in this.props.tooltipData) {
 			if (this.props.tooltipData.hasOwnProperty(key)) {
