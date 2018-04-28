@@ -23,7 +23,7 @@ class Tooltip extends React.Component {
 				position: 'absolute',
 				left: this.props.tooltipData.pageX + 10 + 'px',
 				top: this.props.tooltipData.pageY - 30 + 'px',
-				borderLeft: '2px none ' + this.props.tooltipData.color
+				borderLeft: '2px thick ' + this.props.tooltipData.color
 			}
 			
 			const spanStyle = {
@@ -31,8 +31,8 @@ class Tooltip extends React.Component {
 			}
 			
 			return <div id='tooltip' style={divStyle}>
-				       <span style={spanStyle}>{this.props.tooltipData.name}</span>
-			               {this.props.tooltipData.date}<br />
+				       <span style={spanStyle}>{this.props.tooltipData.name}</span><br />
+			               {new Date(this.props.tooltipData.date)}<br />
 			               {'$' + this.props.tooltipData.value}
 		       	       </div>;	
 		}
