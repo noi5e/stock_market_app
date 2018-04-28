@@ -22,12 +22,18 @@ class Tooltip extends React.Component {
 				opacity: 0.9,
 				position: 'absolute',
 				left: this.props.tooltipData.pageX + 10 + 'px',
-				top: this.props.tooltipData.pageY - 30 + 'px'
+				top: this.props.tooltipData.pageY - 30 + 'px',
+				borderLeft: '2px none ' + this.props.tooltipData.color
+			}
+			
+			const spanStyle = {
+				color: this.props.tooltipData.color
 			}
 			
 			return <div id='tooltip' style={divStyle}>
+				       <span style={spanStyle}>{this.props.tooltipData.name}</span>
 			               {this.props.tooltipData.date}<br />
-			               {this.props.tooltipData.value}
+			               {'$' + this.props.tooltipData.value}
 		       	       </div>;	
 		}
 	}
