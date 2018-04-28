@@ -26,13 +26,16 @@ class Tooltip extends React.Component {
 				borderLeft: '10px thick ' + this.props.tooltipData.color
 			}
 			
+			console.log('10px thick ' + this.props.tooltipData.color);
+			
 			const spanStyle = {
 				color: this.props.tooltipData.color,
-				fontWeight: 'bold'
+				fontWeight: 'bold',
+				backgroundColor: '#000'
 			}
 			
 			const date = new Date(this.props.tooltipData.date);
-			const dateString = date.getMonth() + '/' + date.getDate() + '/';
+			const dateString = date.getMonth() + 1 + '/' + date.getDate();
 			
 			return <div id='tooltip' style={divStyle}>
 				       <span style={spanStyle}>{this.props.tooltipData.name}</span><br />
