@@ -25,8 +25,6 @@ class Tooltip extends React.Component {
 				fontWeight: 'bold'
 			}
 			
-			console.log('10px thick ' + this.props.tooltipData.color);
-			
 			const spanStyle = {
 				color: this.props.tooltipData.color
 			}
