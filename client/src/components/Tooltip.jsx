@@ -19,19 +19,16 @@ class Tooltip extends React.Component {
 			return null;
 		} else {
 			const divStyle = {
-// 				opacity: 0.9,
 				position: 'absolute',
 				left: this.props.tooltipData.pageX + 10 + 'px',
-				top: this.props.tooltipData.pageY - 30 + 'px'
-// 				borderLeft: '10px thick ' + this.props.tooltipData.color
+				top: this.props.tooltipData.pageY - 30 + 'px',
+				fontWeight: 'bold'
 			}
 			
 			console.log('10px thick ' + this.props.tooltipData.color);
 			
 			const spanStyle = {
-				color: this.props.tooltipData.color,
-				fontWeight: 'bold'
-// 				backgroundColor: '#000'
+				color: this.props.tooltipData.color
 			}
 			
 			const date = new Date(this.props.tooltipData.date);
