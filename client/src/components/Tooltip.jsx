@@ -33,8 +33,8 @@ class Tooltip extends React.Component {
 			const dateString = date.getMonth() + 1 + '/' + date.getDate();
 			
 			return <div id='tooltip' style={divStyle}>
-				       <span style={spanStyle}>{this.props.tooltipData.name}</span><br />
-			               {dateString + ' - ' + '$' + this.props.tooltipData.value}<br />
+				       <span style={spanStyle} className='tooltip-row'>{this.props.tooltipData.name}</span><br />
+			               <span style='tooltip-row'>{dateString + ' - ' + '$' + this.props.tooltipData.value}</span><br />
 		       	       </div>;	
 		}
 	}
