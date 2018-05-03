@@ -34,7 +34,7 @@ class Tooltip extends React.Component {
 			
 			return <div id='tooltip' style={divStyle}>
 				       <span style={spanStyle} className='tooltip-row'>{this.props.tooltipData.name}</span><br />
-			               <span style='tooltip-row'>{dateString + ' - ' + '$' + this.props.tooltipData.value}</span><br />
+			               <span className='tooltip-row'>{dateString + ' - ' + '$' + this.props.tooltipData.value}</span><br />
 		       	       </div>;	
 		}
 	}
