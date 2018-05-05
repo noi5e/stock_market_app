@@ -12,6 +12,10 @@ var State = require('../models/state');
 // const quandlApiKey = encodeURIComponent(process.env.QUANDL_API_KEY);
 const quandlApiKey = 'HMMzS9xpbSgZhs3z2zjv';
 
+function formatUTCMonth(monthString) {
+	return (monthString.length === 1) ? '0' + monthString + 1 : monthString;
+}
+
 router.post('/remove_stock_ticker', function(request, response, next) {
 	State.findOne({ name: 'original' }, (error, document) => {
 		if (error) { console.log('couldn\'t find mongo document named "original": ' + error); }
@@ -43,6 +47,10 @@ router.post('/remove_stock_ticker', function(request, response, next) {
 
 router.post('/submit_stock_ticker', function(request, response, next) {
 
+	const currentTime = new Date();
+	
+	console.log(currentTime.getUTCFullYear() + '-' + formatUTCMonth(currentTime.getUTCMonth()) + '-' + currentTime.getUTCDate());
+	
 	let path = '/api/v3/datasets/WIKI/';
 	path += request.body.stockTicker;
 	path += '.json?'
