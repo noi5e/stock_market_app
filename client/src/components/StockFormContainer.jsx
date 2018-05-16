@@ -23,6 +23,7 @@ class StockFormContainer extends React.Component {
 		this.getMouseOverData = this.getMouseOverData.bind(this);
 	}
 
+	// helper function: component receives master state data via two methods: http response and websocket broadcast message. this function compares the two and only updates state if the new state has different data.
 	compareOldStateWithNewState(oldState, newState) {
 		const alphabeticNewState = newState.sort((a, b) => { return a.name > b.name; });
 		
@@ -50,11 +51,7 @@ class StockFormContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		// https://stackoverflow.com/questions/38122068/how-react-js-acts-as-a-websocket-client
-		// https://www.npmjs.com/package/react-websocket
-		// https://github.com/rajiff/ws-react-demo/blob/master/public/components/WebSocketClient.jsx
-
-		this.socket = new WebSocket('wss://' + window.location.host);
+		this.socket = new WebSocket('ws://' + window.location.host);
 
 		this.socket.addEventListener('open', (e) => {
 			this.socket.send('New client opened up a socket!', (error) => {
@@ -66,6 +63,7 @@ class StockFormContainer extends React.Component {
 			let message = e.data;
 			let newStateRegex = /^newState\:/;
 
+			// examines broadcast message. if it begins with 'newState,' updates state.
 			if (newStateRegex.test(message)) {
 				message = message.replace(newStateRegex, '');
 				let messageData = JSON.parse(message);
@@ -158,9 +156,7 @@ class StockFormContainer extends React.Component {
 		}
 
 		if (foundStockTicker) {
-			// add sequence for user entering duplicate stock ticker.
-
-			console.log("stock ticker duplicate.");
+			console.log("error: stock ticker duplicate.");
 		} else {
 			const stockTicker = `stockTicker=${searchTerm}`;
 
@@ -173,9 +169,7 @@ class StockFormContainer extends React.Component {
 					const response = JSON.parse(xhr.response); 
 
 					if (response.hasOwnProperty("quandl_error")) {
-						// add sequence for stock ticker not found.
-
-						console.log("no such stock ticker.")
+						console.log("error: no such stock ticker.")
 					} else {
 						// parses the response from API, adds it to state's list of stocks, then sorts state's list in alphabetical order
 						this.setState({
@@ -196,6 +190,7 @@ class StockFormContainer extends React.Component {
 	render() {
 		let stockContent = [];
 
+		// load transitional "Loading" svg if the component hasn't yet received props
 		if (!this.state.isLoaded) {
 
 			return ( <div className='#line-chart-container'>

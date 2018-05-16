@@ -34,6 +34,7 @@ app.use(function(request, response) {
 });
 
 webSocketServer.on('connection', function connection(webSocket, request) {
+	// constantly check in with live websocket clients
 	webSocket.isAlive = true;
 
 	webSocket.on('pong', function() {
@@ -58,6 +59,7 @@ webSocketServer.on('connection', function connection(webSocket, request) {
 		}
 	});
 
+	// terminate dead clients
 	setInterval(function() {
 		webSocketServer.clients.forEach(function(client) {
 			if (!client.isAlive) { return client.terminate(); };

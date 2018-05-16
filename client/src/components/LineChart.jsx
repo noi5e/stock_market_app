@@ -21,6 +21,8 @@ class LineChart extends React.Component {
 	}
 
 	componentDidUpdate(previousProps, previousState) {
+
+		// only update the component if the new props array has more or fewer stocks
 		if (this.compareTwoArrays(this.props.stockData, previousProps.stockData) === false) {
 			this.renderOrUpdateChart();
 		}
@@ -34,6 +36,7 @@ class LineChart extends React.Component {
 		);
 	}
 
+	// helper function to compare two arrays
 	compareTwoArrays(originalArray, newArray) {
 		if (!newArray) {
 			return false;
@@ -53,8 +56,6 @@ class LineChart extends React.Component {
 	}
 
 	renderOrUpdateChart() {
-		// create a tooltip in react-faux-dom: https://github.com/Olical/react-faux-dom/issues/31
-
 		const stockData = this.props.stockData;
 
 		var self = this;
