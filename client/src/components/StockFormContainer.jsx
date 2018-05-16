@@ -51,7 +51,7 @@ class StockFormContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		this.socket = new WebSocket('ws://' + window.location.host);
+		this.socket = new WebSocket('wss://' + window.location.host);
 
 		this.socket.addEventListener('open', (e) => {
 			this.socket.send('New client opened up a socket!', (error) => {
